@@ -24,9 +24,9 @@ namespace AutoGradMLP
         }
     }
 
-    public class Placeholder : Function
+    public class Variable : Function
     {
-        public Placeholder(string Name, NDarray<double> Y)
+        public Variable(string Name, NDarray<double> Y)
         {
             this.Name = Name;
             this.Y = Y;
@@ -276,12 +276,12 @@ namespace AutoGradMLP
         public InputLayer(int inNodes)
         {
             InputNodes = OutputNodes = inNodes;
-            Function = new Placeholder("inputs", ND.Zeros<double>(1));
+            Function = new Variable("inputs", ND.Zeros<double>(1));
         }
 
         public void SetValue(NDarray<double> X)
         {
-            (Function as Placeholder).SetValue(X);
+            (Function as Variable).SetValue(X);
         }
 
         public override void UpdateWeightsSGD(double lr)
@@ -335,13 +335,13 @@ namespace AutoGradMLP
             OutputNodes = outNodes;
 
             double std = 2.0 / Math.Sqrt(InputNodes);
-            weights = new Placeholder("weights", ND.Uniform(-std, std, InputNodes, OutputNodes));
-            biases = new Placeholder("biases", ND.Zeros<double>(1, OutputNodes));
+            weights = new Variable("weights", ND.Uniform(-std, std, InputNodes, OutputNodes));
+            biases = new Variable("biases", ND.Zeros<double>(1, OutputNodes));
 
             Function = new AddFunc(new DotFunc(layer.Function, weights), biases);
         }
 
-        readonly Placeholder weights, biases;
+        readonly Variable weights, biases;
 
         public override void UpdateWeightsSGD(double lr)
         {

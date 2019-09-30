@@ -16,7 +16,9 @@ namespace AutoGradMLP
             var Y = ND.CreateNDarray(dataY, 4, 1);
 
             var MLP = new Chain(inNodes: 2)
-                .AddDenseLayer(outNodes: 8)
+                .AddDenseLayer(outNodes: 4)
+                .AddTanhActivation()
+                .AddDenseLayer(outNodes: 4)
                 .AddTanhActivation()
                 .AddDenseLayer(outNodes: 1)
                 .AddSigmoidActivation();
