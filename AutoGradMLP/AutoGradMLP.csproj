@@ -34,7 +34,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Frontend\Chain.cs" />
+    <Compile Include="Frontend\NN.cs" />
     <Compile Include="Backend\ND.cs" />
     <Compile Include="Backend\ND.intern.cs" />
     <Compile Include="Backend\ND.meth.cs" />
